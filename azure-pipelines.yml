@@ -10,14 +10,14 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+    
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
     publishWebProjects: true
-    arguments: '-o publish'
+    arguments: '--output publish'
 
 - task: PublishBuildArtifacts@1
-  displayName: Publish (Artifact)
   inputs:
-    pathtoPublish: 'bin/Debug/netcoreapp3.1/publish' 
+    pathtoPublish: 'publish/' 
     artifactName: 'learnDevOps'
