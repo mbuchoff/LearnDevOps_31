@@ -12,6 +12,7 @@ pool:
 steps:
 - task: DotNetCoreCLI@2
   inputs:
+    projects: 'aspnetcore.csproj'
     command: 'build'
 - task: DotNetCoreCLI@2
   inputs:
@@ -21,6 +22,7 @@ steps:
     arguments: '--output publish'
 
 - task: PublishBuildArtifacts@1
+  displayName: Publish (Artifact)
   inputs:
-    pathtoPublish: 'publish/' 
+    pathtoPublish: 'publish' 
     artifactName: 'learnDevOps'
