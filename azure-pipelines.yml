@@ -9,20 +9,24 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+  variables:
+    buildConfiguration: 'Release'
+
 steps:
 - task: DotNetCoreCLI@2
   inputs:
-    projects: 'aspnetcore.csproj'
     command: 'build'
+    arguments: '--configuration $(buildConfiguration)'
+  displayName: 'dotnet build $(buildConfiguration)'
+
 - task: DotNetCoreCLI@2
   inputs:
-    command: 'publish'
-    projects: 'aspnetcore.csproj'
-    publishWebProjects: true
-    arguments: '--output publish'
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
 
 - task: PublishBuildArtifacts@1
-  displayName: Publish (Artifact)
   inputs:
-    pathtoPublish: 'publish' 
-    artifactName: 'learnDevOps'
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'myWebsiteName'
