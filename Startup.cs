@@ -40,7 +40,6 @@ namespace aspnetcore
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
